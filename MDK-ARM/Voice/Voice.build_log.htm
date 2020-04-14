@@ -22,31 +22,21 @@ Dialog DLL:      TCM.DLL V1.32.0.0
  
 <h2>Project:</h2>
 G:\Art\Voice_f103\Voice\MDK-ARM\Voice.uvprojx
-Project File Date:  10/27/2019
+Project File Date:  11/03/2019
 
 <h2>Output:</h2>
 *** Using Compiler 'V5.06 update 5 (build 528)', folder: 'D:\Keil_v5\ARM\ARMCC\Bin'
 Build target 'Voice'
-compiling main.c...
-..\MDK-ARM\WS2812.h(20): warning:  #1295-D: Deprecated declaration WS2812_send_data - give arg types
-  void WS2812_send_data();
-..\MDK-ARM\WS2812.h(21): warning:  #1295-D: Deprecated declaration WS2812_Init - give arg types
-  void WS2812_Init();
-..\MDK-ARM\WS2812.h(22): warning:  #1-D: last line of file ends without a newline
-  #endif
-../Inc/adc.h(42): warning:  #1295-D: Deprecated declaration stop_adc_dma - give arg types
-  void stop_adc_dma();
-../Inc/adc.h(43): warning:  #1295-D: Deprecated declaration star_adc_dma - give arg types
-  void star_adc_dma();
-../Src/main.c(139): warning:  #223-D: function "printf" declared implicitly
-  		printf("\r\nsmooth_voice = %d",smooth_voice);
-../Src/main.c(55): warning:  #177-D: variable "Output"  was declared but never referenced
-  static q15_t Output[SAMPLES/2];
-../Src/main.c: 7 warnings, 0 errors
+compiling myFFT.c...
+myFFT.c(39): warning:  #223-D: function "printf" declared implicitly
+  					printf("\r\n ---lBufMagArray = %d",lBufMagArray[i]);
+myFFT.c(65): warning:  #223-D: function "printf" declared implicitly
+  		printf("\r\n-----voice%d----",voice);
+myFFT.c: 2 warnings, 0 errors
 linking...
-Program Size: Code=7856 RO-data=292 RW-data=20 ZI-data=2316  
+Program Size: Code=9408 RO-data=292 RW-data=32 ZI-data=3880  
 FromELF: creating hex file...
-"Voice\Voice.axf" - 0 Error(s), 7 Warning(s).
+"Voice\Voice.axf" - 0 Error(s), 2 Warning(s).
 
 <h2>Software Packages used:</h2>
 

@@ -138,7 +138,8 @@ void WS2812_send_data(){
 //		printf("\r\n-------------------------------------\r\n");
 //		}
 //	}
-	HAL_SPI_Transmit(&hspi1, WS2812_data_1D, (LED_number + Front_rest_code + Behind_rest_code) * 12, 0xffffffff);
+//	HAL_SPI_Transmit(&hspi1, WS2812_data_1D, (LED_number + Front_rest_code + Behind_rest_code) * 12, 0xffffffff);
+	HAL_SPI_Transmit_DMA(&hspi1, WS2812_data_1D, (LED_number + Front_rest_code + Behind_rest_code) * 12);
 }
 
 

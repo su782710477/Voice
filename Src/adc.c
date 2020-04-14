@@ -21,7 +21,8 @@
 #include "adc.h"
 
 /* USER CODE BEGIN 0 */
-
+#include "tim.h"
+#include "myFFT.h"
 /* USER CODE END 0 */
 
 ADC_HandleTypeDef hadc1;
@@ -135,35 +136,43 @@ void adc_Calibration(){
 }
 
 #define ADC_CONVERTED_DATA_BUFFER_SIZE   LED_number   /* Size of array aADCxConvertedData[] */
-uint16_t   aADCxConvertedData[ADC_CONVERTED_DATA_BUFFER_SIZE];
+uint16_t   aADCxConvertedData[NPT];
 
 void star_adc_dma(){
+	HAL_TIM_Base_Start_IT(&htim3);
 	if (HAL_ADC_Start_DMA(&hadc1,
                         (uint32_t *)aADCxConvertedData,
-                        ADC_CONVERTED_DATA_BUFFER_SIZE
-                       ) != HAL_OK)
-  {
+                        NPT
+                       ) != HAL_OK){
     Error_Handler();
   }
-	printf("\r\nHAL_ADC_Start_DMA...");
-
+//	printf("\r\nHAL_ADC_Start_DMA...");
 }
 void stop_adc_dma(){
+	HAL_TIM_Base_Stop_IT(&htim3);
 	if (HAL_ADC_Stop_DMA(&hadc1	) != HAL_OK)
   {
     Error_Handler();
   }
-	printf("\r\nHAL_ADC_STOP_DMA...");
-
+//	printf("\r\nHAL_ADC_STOP_DMA...");
 }
-q15_t Input_f32_40khz[SAMPLES];
+
+int32_t ADC_inBUF[NPT]; 
+uint8_t adc_transfer_flag = 0;
+
+
 
 void HAL_ADC_ConvCpltCallback(ADC_HandleTypeDef* hadc){
 	stop_adc_dma();
-//	for(int i = 0; i<ADC_CONVERTED_DATA_BUFFER_SIZE; i++){
-//		Input_f32_40khz[i] = aADCxConvertedData[i]- 2048;
-//	}
+	adc_transfer_flag = 1;
 //	star_adc_dma();
+}
+
+void adc_transfer(){
+	for(int i = 0; i< NPT; i++){
+//		ADC_inBUF[i] = (aADCxConvertedData[i]- 2048) << 16;
+		ADC_inBUF[i] = aADCxConvertedData[i];
+	}
 }
 /* USER CODE END 1 */
 

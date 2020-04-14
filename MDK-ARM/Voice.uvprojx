@@ -336,7 +336,7 @@
               <MiscControls></MiscControls>
               <Define>USE_HAL_DRIVER,STM32F103xB,ARM_MATH_CM3</Define>
               <Undefine></Undefine>
-              <IncludePath>../Inc;../Drivers/STM32F1xx_HAL_Driver/Inc;../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy;../Drivers/CMSIS/Device/ST/STM32F1xx/Include;../Drivers/CMSIS/Include;..\MDK-ARM;..\Drivers\CMSIS\Include</IncludePath>
+              <IncludePath>../Inc;          ../Drivers/STM32F1xx_HAL_Driver/Inc;          ../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy;          ../Drivers/CMSIS/Device/ST/STM32F1xx/Include;          ../Drivers/CMSIS/Include;          ..\MDK-ARM;          ..\STM32F10x_DSP_Lib\inc</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -421,6 +421,16 @@
               <FilePath>../Src/sys.c</FilePath>
             </File>
             <File>
+              <FileName>stm32f1xx_hal_timebase_tim.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>../Src/stm32f1xx_hal_timebase_tim.c</FilePath>
+            </File>
+            <File>
+              <FileName>tim.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>../Src/tim.c</FilePath>
+            </File>
+            <File>
               <FileName>usart.c</FileName>
               <FileType>1</FileType>
               <FilePath>../Src/usart.c</FilePath>
@@ -454,11 +464,6 @@
               <FileName>WS2812.c</FileName>
               <FileType>1</FileType>
               <FilePath>.\WS2812.c</FilePath>
-            </File>
-            <File>
-              <FileName>WS2812.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\WS2812.h</FilePath>
             </File>
           </Files>
         </Group>
@@ -556,9 +561,24 @@
           <GroupName>FFT</GroupName>
           <Files>
             <File>
-              <FileName>arm_cortexM3l_math.lib</FileName>
-              <FileType>4</FileType>
-              <FilePath>..\Drivers\CMSIS\Lib\ARM\arm_cortexM3l_math.lib</FilePath>
+              <FileName>cr4_fft_256_stm32.s</FileName>
+              <FileType>2</FileType>
+              <FilePath>..\STM32F10x_DSP_Lib\src\asm\arm\cr4_fft_256_stm32.s</FilePath>
+            </File>
+            <File>
+              <FileName>cr4_fft_64_stm32.s</FileName>
+              <FileType>2</FileType>
+              <FilePath>..\STM32F10x_DSP_Lib\src\asm\arm\cr4_fft_64_stm32.s</FilePath>
+            </File>
+            <File>
+              <FileName>cr4_fft_1024_stm32.s</FileName>
+              <FileType>2</FileType>
+              <FilePath>..\STM32F10x_DSP_Lib\src\asm\arm\cr4_fft_1024_stm32.s</FilePath>
+            </File>
+            <File>
+              <FileName>myFFT.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\myFFT.c</FilePath>
             </File>
           </Files>
         </Group>

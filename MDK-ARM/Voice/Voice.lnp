@@ -6,6 +6,8 @@
 "voice\dma.o"
 "voice\spi.o"
 "voice\sys.o"
+"voice\stm32f1xx_hal_timebase_tim.o"
+"voice\tim.o"
 "voice\usart.o"
 "voice\stm32f1xx_it.o"
 "voice\stm32f1xx_hal_msp.o"
@@ -28,7 +30,10 @@
 "voice\stm32f1xx_hal_tim.o"
 "voice\stm32f1xx_hal_tim_ex.o"
 "voice\stm32f1xx_hal_uart.o"
-"..\Drivers\CMSIS\Lib\ARM\arm_cortexM3l_math.lib"
+"voice\cr4_fft_256_stm32.o"
+"voice\cr4_fft_64_stm32.o"
+"voice\cr4_fft_1024_stm32.o"
+"voice\myfft.o"
 --library_type=microlib --strict --scatter "Voice\Voice.sct"
 --summary_stderr --info summarysizes --map --load_addr_map_info --xref --callgraph --symbols
 --info sizes --info totals --info unused --info veneers

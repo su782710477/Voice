@@ -32,10 +32,7 @@ extern "C" {
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-#include "WS2812.h"
-#include "arm_math.h"
-#include "arm_const_structs.h"
-#define SAMPLES 256
+
 /* USER CODE END Includes */
 
 /* Exported types ------------------------------------------------------------*/

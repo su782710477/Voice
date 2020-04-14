@@ -23,13 +23,13 @@
 #include "adc.h"
 #include "dma.h"
 #include "spi.h"
+#include "tim.h"
 #include "usart.h"
 #include "gpio.h"
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-#include "WS2812.h"
-
+#include "myFFT.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -50,15 +50,9 @@
 /* Private variables ---------------------------------------------------------*/
 
 /* USER CODE BEGIN PV */
+extern uint8_t time_flag;
 
-extern q15_t Input_f32_40khz[SAMPLES];
-static q15_t Output[SAMPLES/2];
-
-uint32_t fftSize = 256;
-uint32_t ifftFlag = 0;
-uint32_t doBitReverse = 1;
-
-
+uint8_t time = 0, time_flag = 0;
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -106,18 +100,12 @@ int main(void)
   MX_SPI1_Init();
   MX_USART1_UART_Init();
   MX_USART3_UART_Init();
+  MX_TIM3_Init();
   /* USER CODE BEGIN 2 */
-
 	star_adc_dma();
-
-
-	uint32_t smooth_voice = 0;
-
 	WS2812_Init();
 	WS2812_send_data();
-//	arm_rfft_instance_q15 S;
-//	arm_rfft_init_q15(&S, fftSize, ifftFlag, doBitReverse);
-extern uint16_t   aADCxConvertedData[LED_number];
+	HAL_TIM_Base_Start_IT(&htim3);
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -125,37 +113,24 @@ extern uint16_t   aADCxConvertedData[LED_number];
   while (1)
   {
 		
-//		arm_rfft_q15(&S,Input_f32_40khz,Output);
-//		for(int i = 0; i < SAMPLES/2; i++){
-//			printf("\r\n---fft0x%04x",Output[i]);
-//		}
-//		star_adc_dma();
-		
-		for(int i = 0; i < LED_number; i++)
-		{
-			smooth_voice = smooth_voice + aADCxConvertedData[i];
+		colorful();
+		if(time_flag == 1){
+			time_flag = 0;
+//			stop_adc_dma();
+//			HAL_TIM_Base_Stop_IT(&htim3);
+			WS2812_Init();
+			WS2812_send_data();
+			printf("------------");
+			star_adc_dma();
+			HAL_TIM_Base_Start_IT(&htim3);
 		}
-		smooth_voice = smooth_voice /LED_number;
-		printf("\r\nsmooth_voice = %d",smooth_voice);
-		for(int i = 0; i < LED_number; i++){
-			if(aADCxConvertedData[i] > 2200 || aADCxConvertedData[i] < 1800)
-			{
-				WS2812_data12X8bit_data(i,i,i,i);
-				
-			}
-			else{
-				WS2812_data12X8bit_data(i,0,0,0);
-			}
-		}
-		WS2812_send_data();
-		star_adc_dma();
 		
+//		FFT_calc();
+//		HAL_Delay(1000);
 //		for(int i = 0; i < 30; i++){
 //			WS2812_data12X8bit_data(i,i*i,i*i*i,i*i*i);
 //		}
 //		WS2812_send_data();
-
-
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
@@ -210,6 +185,33 @@ void SystemClock_Config(void)
 /* USER CODE BEGIN 4 */
 
 /* USER CODE END 4 */
+
+/**
+  * @brief  Period elapsed callback in non blocking mode
+  * @note   This function is called  when TIM2 interrupt took place, inside
+  * HAL_TIM_IRQHandler(). It makes a direct call to HAL_IncTick() to increment
+  * a global variable "uwTick" used as application time base.
+  * @param  htim : TIM handle
+  * @retval None
+  */
+void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
+{
+  /* USER CODE BEGIN Callback 0 */
+
+  /* USER CODE END Callback 0 */
+  if (htim->Instance == TIM2) {
+    HAL_IncTick();
+  }
+  /* USER CODE BEGIN Callback 1 */
+  if (htim->Instance == TIM3) {
+    time++;
+		if(time > 20){
+			time_flag = 1;
+			time = 0;
+		}
+  }
+  /* USER CODE END Callback 1 */
+}
 
 /**
   * @brief  This function is executed in case of error occurrence.

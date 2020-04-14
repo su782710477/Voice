@@ -28,13 +28,6 @@ voice\sys.o: ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_flash.h
 voice\sys.o: ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_flash_ex.h
 voice\sys.o: ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_pwr.h
 voice\sys.o: ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_spi.h
+voice\sys.o: ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_tim.h
+voice\sys.o: ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_tim_ex.h
 voice\sys.o: ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_uart.h
-voice\sys.o: ..\MDK-ARM\WS2812.h
-voice\sys.o: ../Inc/main.h
-voice\sys.o: ../Inc/spi.h
-voice\sys.o: ../Drivers/CMSIS/Include/arm_math.h
-voice\sys.o: ../Drivers/CMSIS/Include/core_cm3.h
-voice\sys.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
-voice\sys.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\math.h
-voice\sys.o: ../Drivers/CMSIS/Include/arm_const_structs.h
-voice\sys.o: ../Drivers/CMSIS/Include/arm_common_tables.h
